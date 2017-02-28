@@ -54,15 +54,15 @@ Create the secrets that contain the TLS certificates and the user/password for a
 
 ```bash
 $ docker secret create \
-  nginx-registry-fe.crt \
+  nginx-registry-fe_domain.crt \
   --label service=nginx-registry-fe \
   domain.crt
 $ docker secret create \
-  nginx-registry-fe.key \
+  nginx-registry-fe_domain.key \
   --label service=nginx-registry-fe \
   domain.key
 $ docker secret create \
-  nginx-registry-fe.htpasswd \
+  nginx-registry-fe_htpasswd \
   --label service=nginx-registry-fe \
   nginx.htpasswd
 ```
@@ -77,9 +77,9 @@ $ docker \
     --limit-memory 64m \
     --publish 443:443 \
     --network registry \
-    --secret source=nginx-registry-fe.crt,target=domain.crt \
-    --secret source=nginx-registry-fe.key,target=domain.key \
-    --secret source=nginx-registry-fe.htpasswd,target=nginx.htpasswd \
+    --secret source=nginx-registry-fe_domain.crt,target=domain.crt \
+    --secret source=nginx-registry-fe_domain.key,target=domain.key \
+    --secret source=nginx-registry-fe_htpasswd,target=nginx.htpasswd \
     -e TLS_CERT=/run/secrets/domain.crt \
     -e TLS_KEY=/run/secrets/domain.key \
     basi/nginx-registry-fe:latest
