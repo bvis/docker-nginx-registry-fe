@@ -1,4 +1,4 @@
-FROM nginx:1.11-alpine
+FROM nginx:1.13-alpine
 
 ARG "version=0.1.0-dev"
 ARG "build_date=unknown"
